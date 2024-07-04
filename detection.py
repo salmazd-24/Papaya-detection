@@ -1,11 +1,6 @@
-# Python In-built packages
+import streamlit as st
 from pathlib import Path
 import PIL
-
-# External packages
-import streamlit as st
-
-# Local Modules
 import settings
 import helper
 
@@ -91,7 +86,6 @@ if source_radio == settings.IMAGE:
                         for box in boxes:
                             st.write(box.data)
                 except Exception as ex:
-                    # st.write(ex)
                     st.write("No image is uploaded yet!")
 
 elif source_radio == settings.VIDEO:
@@ -99,12 +93,6 @@ elif source_radio == settings.VIDEO:
 
 elif source_radio == settings.WEBCAM:
     helper.play_webcam(confidence, model)
-
-# elif source_radio == settings.RTSP:
-#     helper.play_rtsp_stream(confidence, model)
-
-# elif source_radio == settings.YOUTUBE:
-#     helper.play_youtube_video(confidence, model)
 
 else:
     st.error("Please select a valid source type!")
