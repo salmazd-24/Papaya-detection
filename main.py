@@ -10,6 +10,43 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.markdown("""
+    <style>
+        .stApp > header {
+            background-color: #EFEFEF; /* Header background color */
+        }
+        .main {
+            background-color: #EFEFEF;
+            color: #000000;
+        }
+        .sidebar .sidebar-content {
+            background-color: #1E1E1E;
+        }
+        .sidebar .sidebar-content .element-container {
+            color: #E0E0E0;
+        }
+        .sidebar .sidebar-content h1, .main h1, .main h2, .main h3 {
+            color: #FF9800;
+        }
+        .stButton > button {
+            background-color: #FF9800;
+            color: #FFFFFF;
+        }
+        .stButton > button:hover {
+            background-color: #FFEB3B;
+            color: #FF9800;
+        }
+        .stButton > button:active {
+            background-color: #FFEB3B;
+            color: #000000;
+        }
+        .stAlert > div:first-child {
+            background-color: #3d4ecc !important; /* Success message background color */
+            color: #FFFFFF !important; /* Success message text color */
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Database connection
 def get_db_connection():
     try:
@@ -90,7 +127,6 @@ if 'username' not in st.session_state:
         register()
 else:
     st.sidebar.title(f"Welcome {st.session_state['full_name']}")
-    st.sidebar.success("Select a page below")
     
     pages = {
         "Home": "home.py",
@@ -98,7 +134,7 @@ else:
         "Detection": "detection.py"
     }
     
-    page = st.sidebar.selectbox("Navigate", list(pages.keys()))
+    page = st.sidebar.selectbox("Select a page below", list(pages.keys()))
     
     if st.sidebar.button("Logout"):
         del st.session_state['username']
@@ -106,6 +142,6 @@ else:
         st.experimental_rerun()
     
     # Run the selected page
-    with open(pages[page]) as f:
+    with open(pages[page], encoding='utf-8') as f:
         code = f.read()
         exec(code, globals())

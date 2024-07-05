@@ -1,0 +1,7 @@
+.streamlit
+
+[theme]
+primaryColor="#ffeb3b"
+backgroundColor="#ff9800"
+secondaryBackgroundColor="#9ccc65"
+textColor="#121212"
