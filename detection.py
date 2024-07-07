@@ -4,14 +4,6 @@ import PIL
 import settings
 import helper
 
-# Setting page layout
-st.set_page_config(
-    page_title="Papaya Ripeness Detection Using YOLOv8",
-    page_icon="🤖",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 # Main page heading
 st.title("Papaya Ripeness Detection Using YOLOv8")
 
@@ -19,17 +11,10 @@ st.title("Papaya Ripeness Detection Using YOLOv8")
 st.sidebar.header("ML Model Config")
 
 # Model Options
-model_type = st.sidebar.radio(
-    "Select Task", ['Detection', 'Segmentation'])
-
 confidence = float(st.sidebar.slider(
     "Select Model Confidence", 25, 100, 40)) / 100
 
-# Selecting Detection Or Segmentation
-if model_type == 'Detection':
-    model_path = Path(settings.DETECTION_MODEL)
-elif model_type == 'Segmentation':
-    model_path = Path(settings.SEGMENTATION_MODEL)
+model_path = Path(settings.DETECTION_MODEL)
 
 # Load Pre-trained ML Model
 try:
