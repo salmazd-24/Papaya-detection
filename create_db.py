@@ -1,5 +1,5 @@
 import sqlite3
-from werkzeug.security import generate_password_hash
+import hashlib
 
 # Connect to the database (or create it if not exist)
 conn = sqlite3.connect('users.db')
@@ -16,23 +16,15 @@ CREATE TABLE IF NOT EXISTS users (
 )
 ''')
 
-# Create the detection_history table if not exists
-c.execute('''
-CREATE TABLE IF NOT EXISTS detection_history (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    image BLOB,
-    results TEXT
-)
-''')
-
-# Generate hashed passwords
-hashed_password_admin = generate_password_hash('password12345')
-hashed_password_salmazd = generate_password_hash('password123')
-hashed_password_alexraven = generate_password_hash('password456')
+# Hash passwords
+def hash_password(password):
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 # Insert sample users with hashed passwords
+hashed_password_admin = hash_password('password12345')
+hashed_password_salmazd = hash_password('password123')
+hashed_password_alexraven = hash_password('password456')
+
 c.execute('''
 INSERT INTO users (username, password) VALUES
 ('admin', ?),

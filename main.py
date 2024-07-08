@@ -1,6 +1,6 @@
 import streamlit as st
 import sqlite3
-from werkzeug.security import check_password_hash
+import hashlib
 
 # Set page configuration at the very beginning
 st.set_page_config(
@@ -16,6 +16,14 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+# Hash password function
+def hash_password(password):
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+# Check password function
+def check_password(hashed_password, user_password):
+    return hashed_password == hashlib.sha256(user_password.encode('utf-8')).hexdigest()
+
 # Authentication function
 def authenticate_user(username, password):
     conn = get_db_connection()
@@ -23,7 +31,7 @@ def authenticate_user(username, password):
     cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
     user = cursor.fetchone()
     conn.close()
-    if user and check_password_hash(user['password'], password):
+    if user and check_password(user['password'], password):
         return user
     return None
 
