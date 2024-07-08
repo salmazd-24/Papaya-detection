@@ -1,8 +1,8 @@
 from ultralytics import YOLO
 import streamlit as st
 import cv2
+from .helper import display_tracker_options, _display_detected_frames
 import settings
-import time  # Importing Python's time module for sleep functionality
 
 
 def load_model(model_path):
@@ -33,13 +33,20 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
                    use_column_width=True
                    )
 
+import streamlit as st
+import cv2
+from .helper import display_tracker_options, _display_detected_frames
+import settings
+
 def play_webcam(conf, model):
     source_webcam = settings.WEBCAM_PATH
     is_display_tracker, tracker = display_tracker_options()
+
     if st.sidebar.button('Buka Kamera'):
         try:
             vid_cap = cv2.VideoCapture(source_webcam)
             st_frame = st.empty()
+
             if not vid_cap.isOpened():
                 raise RuntimeError('Could not open webcam.')
 
@@ -52,8 +59,10 @@ def play_webcam(conf, model):
 
                 # Delay to match the webcam frame rate
                 # You may adjust this delay based on your webcam's frame rate
-                time.sleep(0.1)  # Using time.sleep() for delay
+                st.time.sleep(0.1)  # Using Streamlit's time.sleep() for delay
 
             vid_cap.release()
+        except RuntimeError as e:
+            st.sidebar.error(f"Error loading webcam: {e}")
         except Exception as e:
-            st.sidebar.error("Error loading webcam: " + str(e))
+            st.sidebar.error(f"Unexpected error: {e}")
