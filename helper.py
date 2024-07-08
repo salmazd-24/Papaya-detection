@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 import streamlit as st
 import cv2
-from .settings import WEBCAM_PATH
+from settings import WEBCAM_PATH  # Adjusted import
 
 def display_tracker_options():
     display_tracker = st.radio("Display Tracker", ('Yes', 'No'))
