@@ -1,43 +1,24 @@
 import streamlit as st
 
-st.markdown(
-    """
-    <style>
-    .big-font {
-        font-size: 18px !important;
-    }
-    .image-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .image-container img {
-        max-width: 100%;
-        margin: 0 !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.title("Papaya Ripeness Detection using YOLOv8")
-st.write("In this application, we detect the ripeness of papaya fruit using the **YOLOv8** algorithm in real-time.", unsafe_allow_html=True)
+st.title("Deteksi Kematangan Pepaya menggunakan YOLOv8")
+st.write("Dalam aplikasi ini, sistem mendeteksi kematangan buah pepaya secara real-time menggunakan algoritma **YOLOv8** dan library **Streamlit** untuk tampilan interface. Sistem deteksi ini memiliki akurasi mAP sebesar **0.873**, precision **0.785**, dan recall **0.821**", unsafe_allow_html=True)
 
 # Using columns layout for images
 col1, col2 = st.columns(2)
 
 # Default Image
 with col1:
-    st.image("images/papaya.png", caption="Default Image", use_column_width=True)
+    st.image("images/papaya.png", caption="Gambar Default", use_column_width=True)
 
 # Detected Image
 with col2:
-    st.image("images/detect-papaya.png", caption="Detected Image", use_column_width=True)
+    st.image("images/detect-papaya.png", caption="Gambar Terdeteksi", use_column_width=True)
 
 # Explanation about other pages
 st.markdown("""
-### Other Pages
+### Halaman Lain
 
-- **Information Page**: This page provides details about the ripeness level of papaya fruit.
-- **Detection Page**: Here, you can detect the ripeness of papaya fruit in real-time. You can use a webcam or upload images.
+- **Halaman Tingkat Kematangan**: Halaman ini memberikan informasi mengenai tingkat kematangan buah pepaya.
+- **Halaman Deteksi**: Di sini, Anda dapat mendeteksi kematangan buah pepaya secara real-time. Anda dapat menggunakan webcam atau mengunggah gambar.
+- **Halaman Riwayat**: Halaman ini menampilkan riwayat hasil deteksi yang telah dilakukan.
 """, unsafe_allow_html=True)
