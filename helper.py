@@ -2,6 +2,7 @@ from ultralytics import YOLO
 import streamlit as st
 import cv2
 import settings
+import time  # Importing Python's time module for sleep functionality
 
 
 def load_model(model_path):
@@ -39,18 +40,20 @@ def play_webcam(conf, model):
         try:
             vid_cap = cv2.VideoCapture(source_webcam)
             st_frame = st.empty()
-            while (vid_cap.isOpened()):
+            if not vid_cap.isOpened():
+                raise RuntimeError('Could not open webcam.')
+
+            while True:
                 success, image = vid_cap.read()
-                if success:
-                    _display_detected_frames(conf,
-                                             model,
-                                             st_frame,
-                                             image,
-                                             is_display_tracker,
-                                             tracker,
-                                             )
-                else:
-                    vid_cap.release()
+                if not success:
                     break
+
+                _display_detected_frames(conf, model, st_frame, image, is_display_tracker, tracker)
+
+                # Delay to match the webcam frame rate
+                # You may adjust this delay based on your webcam's frame rate
+                time.sleep(0.1)  # Using time.sleep() for delay
+
+            vid_cap.release()
         except Exception as e:
-            st.sidebar.error("Error loading video: " + str(e))
+            st.sidebar.error("Error loading webcam: " + str(e))
