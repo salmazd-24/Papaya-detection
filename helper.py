@@ -1,11 +1,13 @@
 from ultralytics import YOLO
 import streamlit as st
 import cv2
-from settings import WEBCAM_PATH  # Adjusted import
+import settings
+
 
 def load_model(model_path):
     model = YOLO(model_path)
     return model
+
 
 def display_tracker_options():
     display_tracker = st.radio("Display Tracker", ('Yes', 'No'))
@@ -31,28 +33,24 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
                    )
 
 def play_webcam(conf, model):
+    source_webcam = settings.WEBCAM_PATH
     is_display_tracker, tracker = display_tracker_options()
-
     if st.sidebar.button('Buka Kamera'):
         try:
-            vid_cap = cv2.VideoCapture(WEBCAM_PATH)
+            vid_cap = cv2.VideoCapture(source_webcam)
             st_frame = st.empty()
-
-            if not vid_cap.isOpened():
-                raise RuntimeError('Could not open webcam.')
-
-            while True:
+            while (vid_cap.isOpened()):
                 success, image = vid_cap.read()
-                if not success:
+                if success:
+                    _display_detected_frames(conf,
+                                             model,
+                                             st_frame,
+                                             image,
+                                             is_display_tracker,
+                                             tracker,
+                                             )
+                else:
+                    vid_cap.release()
                     break
-
-                _display_detected_frames(conf, model, st_frame, image, is_display_tracker, tracker)
-
-                # Delay to match the webcam frame rate
-                st.time.sleep(0.1)
-
-            vid_cap.release()
-        except RuntimeError as e:
-            st.sidebar.error(f"Error loading webcam: {e}")
         except Exception as e:
-            st.sidebar.error(f"Unexpected error: {e}")
+            st.sidebar.error("Error loading video: " + str(e))
