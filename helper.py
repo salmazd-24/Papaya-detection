@@ -3,6 +3,10 @@ import streamlit as st
 import cv2
 from settings import WEBCAM_PATH  # Adjusted import
 
+def load_model(model_path):
+    model = YOLO(model_path)
+    return model
+
 def display_tracker_options():
     display_tracker = st.radio("Display Tracker", ('Yes', 'No'))
     is_display_tracker = True if display_tracker == 'Yes' else False
