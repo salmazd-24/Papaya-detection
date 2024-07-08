@@ -1,14 +1,7 @@
 from ultralytics import YOLO
 import streamlit as st
 import cv2
-from .helper import display_tracker_options, _display_detected_frames
-import settings
-
-
-def load_model(model_path):
-    model = YOLO(model_path)
-    return model
-
+from .settings import WEBCAM_PATH
 
 def display_tracker_options():
     display_tracker = st.radio("Display Tracker", ('Yes', 'No'))
@@ -33,18 +26,12 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
                    use_column_width=True
                    )
 
-import streamlit as st
-import cv2
-from .helper import display_tracker_options, _display_detected_frames
-import settings
-
 def play_webcam(conf, model):
-    source_webcam = settings.WEBCAM_PATH
     is_display_tracker, tracker = display_tracker_options()
 
     if st.sidebar.button('Buka Kamera'):
         try:
-            vid_cap = cv2.VideoCapture(source_webcam)
+            vid_cap = cv2.VideoCapture(WEBCAM_PATH)
             st_frame = st.empty()
 
             if not vid_cap.isOpened():
@@ -58,8 +45,7 @@ def play_webcam(conf, model):
                 _display_detected_frames(conf, model, st_frame, image, is_display_tracker, tracker)
 
                 # Delay to match the webcam frame rate
-                # You may adjust this delay based on your webcam's frame rate
-                st.time.sleep(0.1)  # Using Streamlit's time.sleep() for delay
+                st.time.sleep(0.1)
 
             vid_cap.release()
         except RuntimeError as e:
