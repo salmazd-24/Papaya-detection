@@ -5,30 +5,8 @@ This repository is an extensive open-source project showcasing the seamless inte
 
 ## <span style="color:deepskyblue">WebApp Demo on Streamlit Server</span>
 
-Thank you team [Streamlit](<https://github.com/streamlit/streamlit>) for the community support for the cloud upload. 
-
 This app is up and running on Streamlit cloud server!!! You can check the demo of this web application on this link 
-[yolov8-streamlit-detection-tracking-webapp](https://codingmantras-yolov8-streamlit-detection-tracking-app-njcqjg.streamlit.app/)
-
-## Demo Pics
-
-### Home page
-
-<img src="https://github.com/CodingMantras/yolov8-streamlit-detection-tracking/blob/master/assets/pic1.png" >
-
-### Page after uploading an image and object detection
-
-<img src="https://github.com/CodingMantras/yolov8-streamlit-detection-tracking/blob/master/assets/pic3.png" >
-
-## Requirements
-
-Python 3.6+
-YOLOv8
-Streamlit
-
-```bash
-pip install ultralytics streamlit pytube
-```
+[yolov8-streamlit-detection-tracking-webapp]([https://papaya-detection.streamlit.app/])
 
 ## Installation
 
