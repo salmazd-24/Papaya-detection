@@ -8,7 +8,7 @@ This repository is an extensive open-source project showcasing the seamless inte
 This app is up and running on Streamlit cloud server!!! You can check the demo of this web application on this link 
 [Papaya-detection](https://papaya-detection.streamlit.app/)
 
-Username: admin
+Username: admin    
 Password: password12345
 
 ## Installation
