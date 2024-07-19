@@ -6,7 +6,7 @@ This repository is an extensive open-source project showcasing the seamless inte
 ## <span style="color:deepskyblue">WebApp Demo on Streamlit Server</span>
 
 This app is up and running on Streamlit cloud server!!! You can check the demo of this web application on this link 
-[yolov8-streamlit-detection-tracking-webapp]([https://papaya-detection.streamlit.app/])
+[Papaya-detection](https://papaya-detection.streamlit.app/)
 
 ## Installation
 
