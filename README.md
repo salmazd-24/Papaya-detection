@@ -8,10 +8,13 @@ This repository is an extensive open-source project showcasing the seamless inte
 This app is up and running on Streamlit cloud server!!! You can check the demo of this web application on this link 
 [Papaya-detection](https://papaya-detection.streamlit.app/)
 
+Username: admin
+Password: password12345
+
 ## Installation
 
-- Clone the repository: git clone <https://github.com/CodingMantras/yolov8-streamlit-detection-tracking.git>
-- Change to the repository directory: `cd yolov8-streamlit-detection-tracking`
+- Clone the repository: git clone <https://github.com/salmazd-24/Papaya-detection.git>
+- Change to the repository directory: `cd Papaya-detection`
 - Create `weights`, `videos`, and `images` directories inside the project.
 - Download the pre-trained YOLOv8 weights from (<https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt>) and save them to the `weights` directory in the same project.
 
